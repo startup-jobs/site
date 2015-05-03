@@ -13,4 +13,4 @@ RUN pip install Django
 RUN pip install psycopg2 
 RUN apt-get purge -y curl
 COPY . /opt/code
-EXPOSE 8000
+CMD ["python", "/opt/code/manage.py", "runserver", "0.0.0.0:8000"]
