@@ -41,6 +41,7 @@ class JobProfile(models.Model):
 	post_url = models.URLField(max_length=200)
 	job_type = models.ForeignKey('JobType')
 	job_category = models.ForeignKey('JobCategory')	
+	published = models.BooleanField(default=False)
 	
 	created	= models.DateTimeField(editable=False)
 	modified = models.DateTimeField(editable=False)

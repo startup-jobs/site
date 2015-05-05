@@ -3,9 +3,9 @@ from models import JobProfile, City, Organization, JobType, JobCategory
 
 
 class JobAdmin(admin.ModelAdmin):
-	list_display = ('title', 'location', 'job_type', 'job_category','created')
+	list_display = ('title', 'location', 'job_type', 'job_category', 'published', 'created')
 	search_fields = ('location__name', 'title')
-	list_filter = ('created', )
+	list_filter = ('created', 'published')
 	ordering = ('-created', )
 
 # Register your models here.
