@@ -1,4 +1,5 @@
 from django.db import models
+import datetime;
 
 # Create your models here.
 
@@ -7,6 +8,7 @@ class City(models.Model):
 	
 	def __unicode__(self):
 		return self.name
+
 	class Meta:
 		verbose_name_plural = "cities"
 	
@@ -19,7 +21,7 @@ class Organization(models.Model):
 		return self.name
 
 class JobType(models.Model):
-	type = models.URLField(max_length=200)
+	type = models.CharField(max_length=200)
 
 	def __unicode__(self):
 		return self.type
@@ -39,6 +41,15 @@ class JobProfile(models.Model):
 	post_url = models.URLField(max_length=200)
 	job_type = models.ForeignKey('JobType')
 	job_category = models.ForeignKey('JobCategory')	
-
+	
+	created	= models.DateTimeField(editable=False)
+	modified = models.DateTimeField(editable=False)
+	
 	def __unicode__(self):
 		return self.title
+
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.created = datetime.datetime.today()
+	        self.modified = datetime.datetime.today()
+        	return super(JobProfile, self).save(*args, **kwargs)
